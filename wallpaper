@@ -1,0 +1,46 @@
+#!/bin/python
+
+import subprocess
+import os
+
+def listar_y_seleccionar_fondo():
+  """Lista los archivos del directorio Wallpaper y permite al usuario
+  seleccionar uno, guardando el nombre del archivo elegido en la variable
+  FONDO_ELEGIDO. Luego, escribe la configuración en un archivo.
+  """
+
+  archivos = os.listdir("/home/SpikeMM/Wallpaper")
+
+  if not archivos:
+    print("No se encontraron archivos en este directorio.")
+    return
+
+  print("LISTA DE ARCHIVOS:")
+  for i, archivo in enumerate(archivos):
+    print(f"{i+1} -> {archivo}")
+
+  while True:
+    try:
+      seleccion = int(input("SELECCIONA UN ARCHIVO: "))
+      if 1 <= seleccion <= len(archivos):
+        break
+      else:
+        print("Número inválido. Intenta de nuevo.")
+    except ValueError:
+      print("Entrada inválida. Debes ingresar un número.")
+
+  global FONDO_ELEGIDO
+  FONDO_ELEGIDO = archivos[seleccion - 1]
+
+  # Escribir la configuración en el archivo
+  ruta_archivo = "/home/SpikeMM/.config/hypr/hyprpaper.conf"
+  with open(ruta_archivo, "w") as f:
+    f.write(f"preload = /home/SpikeMM/Wallpaper/{FONDO_ELEGIDO}\n")
+    f.write(f"wallpaper = eDP-1,/home/SpikeMM/Wallpaper/{FONDO_ELEGIDO}\n")
+
+
+# Llamar a la función para ejecutar el programa
+listar_y_seleccionar_fondo()
+subprocess.run("pkill hyprpaper",shell=True)
+subprocess.run("hyprpaper &> /dev/null &",shell=True)
+print("Fondo cambiado correctamente")

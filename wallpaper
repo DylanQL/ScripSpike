@@ -9,7 +9,7 @@ def listar_y_seleccionar_fondo():
   FONDO_ELEGIDO. Luego, escribe la configuración en un archivo.
   """
 
-  archivos = os.listdir("/home/SpikeMM/Wallpaper")
+  archivos = os.listdir("/home/spikemm/Wallpaper")
 
   if not archivos:
     print("No se encontraron archivos en este directorio.")
@@ -33,10 +33,10 @@ def listar_y_seleccionar_fondo():
   FONDO_ELEGIDO = archivos[seleccion - 1]
 
   # Escribir la configuración en el archivo
-  ruta_archivo = "/home/SpikeMM/.config/hypr/hyprpaper.conf"
+  ruta_archivo = "/home/spikemm/.config/hypr/hyprpaper.conf"
   with open(ruta_archivo, "w") as f:
-    f.write(f"preload = /home/SpikeMM/Wallpaper/{FONDO_ELEGIDO}\n")
-    f.write(f"wallpaper = eDP-1,/home/SpikeMM/Wallpaper/{FONDO_ELEGIDO}\n")
+    f.write(f"preload = /home/spikemm/Wallpaper/{FONDO_ELEGIDO}\n")
+    f.write(f"wallpaper = eDP-1,/home/spikemm/Wallpaper/{FONDO_ELEGIDO}\n")
 
 
 # Llamar a la función para ejecutar el programa

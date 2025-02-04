@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ranger_cd() {
   local temp_file=$(mktemp)
@@ -7,7 +7,8 @@ ranger_cd() {
   ranger --choosedir="$temp_file" "$@"
 
   if [ -f "$temp_file" ]; then
-    local chosen_dir=$(cat -- "$temp_file")
+    local chosen_dir
+    chosen_dir=$(<"$temp_file")
     if [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$(pwd)" ]; then
       if [ -d "$chosen_dir" ]; then
         cd -- "$chosen_dir" || {
@@ -25,5 +26,6 @@ ranger_cd() {
   fi
 }
 
-# Call the function to make it usable
+# Llamada opcional a la función si quieres que el script
+# cambie de directorio inmediatamente al ejecutarlo:
 ranger_cd "$@"

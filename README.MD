@@ -19,5 +19,5 @@ source ranger_cd
 
 OTRA OPCIÓN ES USAR UN ALIAS
 
-alias ranger_go="source ranger_cd"c
+alias ranger_go="source ranger_cd"
 
